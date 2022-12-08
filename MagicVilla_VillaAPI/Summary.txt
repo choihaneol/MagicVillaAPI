@@ -1,0 +1,57 @@
+﻿### Login function
+1. Model 생성 ex) LocalUser.cs
+2. DB Table 추가를 위해 ApplicationDbContext 에 테이블등록 ex)  ApplicationDbContext
+3. .Net migration 추가
+   .Net migration database upgrade
+4.  LoginRequestDTO(Id,PSW), LoginResponseDTO(UserInfo,Token)
+    RegisterationRequestDTO(등록요청정보)
+5. UserRepository, IUserRepository 생성
+   - Unique user
+   - Login : appsetting.json에 secret key 추가 한뒤 토큰생성(Encrypt the token using secret key)            
+   - Register
+6. program.cs에 UserRepository 사용을 위한 선언
+7. Controller 작성
+   - Swagger에서 등록 / 로그인 기능 잘되는지 확인
+   - 로그인할때 발생되는 토큰을 jwt.io 에서 decoding 하여 Payload가 토큰 encoding전 정보 일치하는지 확인
+8. CRUD 기능이 있는 VillaAPIController에 Authentication 요청 기능 추가
+9. Swagger에 토큰 인풋시키는 기능 추가 
+
+
+
+###API Versioning
+1. Programs.cs에 버전 관리 서비스추가
+2. Controller 상단과 추가된 펑션의 엔드포인트에 추가된 버전명시
+3. Programs.cs에 Multiple Swagger documentation, Multiple versioning 기능 추가- Swagger UI 정보 수정 밑 버전관리 토글추가
+4. 버전이 많아지는 경우를위해 버전별로 폴더를 만들어 컨트롤러를 나눈다.
+5. UserControll(로그인)과 같이 constant한 API는 Neutral version처리 
+   - Swagger API는 Restful Method와 파라미터가 같으면 function 구별못함
+6. Depricated 된 경우 Swagger UI에 표시 
+   
+
+##Caching (데이터 복사본을 정해진시간동안 보관해놓고 빠르게 반환함)
+1. Programs.cs에 Caching, Cache profile 서비스 등록
+2. Controller에서 API엔드포인드쪽에 Caching할 시간설
+
+
+##Filtering (원하는 데이터를 컨트롤러단에서 필터링)
+1. Contoller에서 FromQuery 명령어와 필터링하고자 하는 쿼리문 작성
+2. Controller에서 FromQuery 명령어와 search변수를 이용한 검색 기능 추가 
+
+
+
+##Pagination
+1. IRepository, Repository에 PageNumber, PageSize 파라미터 추가
+2. Repository에 페이지네이션 공식 추가 
+ query = query.Skip(pageSize * (pageNumber-1).Take(PageSize)
+ ex) 만약 5개의 페이지중에 2번째 페이지를 보고 싶다면
+ skip(5*(2-1)). Take(5)
+ we want to skip first 5 record, we want to take next 5 record
+3. Controller에서 Repository호출하는 부분에 PageSize, PageNumber 파라미터 추가
+4. API Response header에 페이지정보 추가를 위해 Pagination 모델 생성
+   Controller에서 X-Pagination Header 생성
+
+##Error response
+BadRequest로 할지 _reponse 헤더에 담아서 IsSuccess 같은거로 반환할지는 선택
+
+
+
