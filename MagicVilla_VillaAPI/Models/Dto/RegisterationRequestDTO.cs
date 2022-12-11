@@ -1,5 +1,4 @@
-﻿using System;
-namespace MagicVilla_VillaAPI.Models.Dto
+﻿namespace MagicVilla_VillaAPI.Models.Dto
 {
     public class RegisterationRequestDTO
     {
@@ -9,4 +8,3 @@ namespace MagicVilla_VillaAPI.Models.Dto
         public string Role { get; set; }
     }
 }
-

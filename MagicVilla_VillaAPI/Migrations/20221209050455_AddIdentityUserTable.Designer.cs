@@ -4,6 +4,7 @@ using MagicVilla_VillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVillaVillaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209050455_AddIdentityUserTable")]
+    partial class AddIdentityUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,7 +171,7 @@ namespace MagicVillaVillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2022, 12, 11, 0, 24, 14, 278, DateTimeKind.Local).AddTicks(2230),
+                            CreatedDate = new DateTime(2022, 12, 8, 23, 4, 54, 924, DateTimeKind.Local).AddTicks(3320),
                             Details = "Fusce 11 tincidunt maximus leo,",
                             ImageUrl = "",
                             Name = "Royal Villa1",
@@ -181,7 +184,7 @@ namespace MagicVillaVillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "",
-                            CreatedDate = new DateTime(2022, 12, 11, 0, 24, 14, 278, DateTimeKind.Local).AddTicks(2270),
+                            CreatedDate = new DateTime(2022, 12, 8, 23, 4, 54, 924, DateTimeKind.Local).AddTicks(3360),
                             Details = "Fusce 11 tincidunt maximus leo,",
                             ImageUrl = "",
                             Name = "Royal Villa2",
@@ -194,7 +197,7 @@ namespace MagicVillaVillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "",
-                            CreatedDate = new DateTime(2022, 12, 11, 0, 24, 14, 278, DateTimeKind.Local).AddTicks(2270),
+                            CreatedDate = new DateTime(2022, 12, 8, 23, 4, 54, 924, DateTimeKind.Local).AddTicks(3370),
                             Details = "Fusce 11 tincidunt maximus leo,",
                             ImageUrl = "",
                             Name = "Royal Villa3",
@@ -207,7 +210,7 @@ namespace MagicVillaVillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "",
-                            CreatedDate = new DateTime(2022, 12, 11, 0, 24, 14, 278, DateTimeKind.Local).AddTicks(2270),
+                            CreatedDate = new DateTime(2022, 12, 8, 23, 4, 54, 924, DateTimeKind.Local).AddTicks(3370),
                             Details = "Fusce 11 tincidunt maximus leo,",
                             ImageUrl = "",
                             Name = "Royal Villa4",
@@ -220,7 +223,7 @@ namespace MagicVillaVillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "",
-                            CreatedDate = new DateTime(2022, 12, 11, 0, 24, 14, 278, DateTimeKind.Local).AddTicks(2280),
+                            CreatedDate = new DateTime(2022, 12, 8, 23, 4, 54, 924, DateTimeKind.Local).AddTicks(3370),
                             Details = "Fusce 11 tincidunt maximus leo,",
                             ImageUrl = "",
                             Name = "Royal Villa5",

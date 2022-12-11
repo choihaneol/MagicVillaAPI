@@ -3,10 +3,13 @@ using System.Configuration;
 using System.Text;
 using MagicVilla_VillaAPI;
 using MagicVilla_VillaAPI.Data;
+using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Repository;
 using MagicVilla_VillaAPI.Repository.IRepository;
+using MagicVilla_VillaAPI.Repository.IRepostiory;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.CodeAnalysis.Options;
@@ -24,6 +27,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 
 });
+
+//Identification
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 //Caching
 builder.Services.AddResponseCaching();
@@ -43,14 +50,13 @@ builder.Services.AddApiVersioning(options =>
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ReportApiVersions = true;
 });
+
 //swagger에서 API version 자동으로 업데이트 
 builder.Services.AddVersionedApiExplorer(options =>
 {
     options.GroupNameFormat = "'v'VVV";
     options.SubstituteApiVersionInUrl = true;
 });
-
-
 
 //Authorization
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
@@ -61,6 +67,7 @@ builder.Services.AddAuthentication(x =>
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
+
 //Optional JwtBearer 사용
 .AddJwtBearer(x => {
     x.RequireHttpsMetadata = false;
@@ -74,7 +81,6 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-
 builder.Services.AddControllers(option => {
     //Cache profile
     option.CacheProfiles.Add("Default30",
@@ -86,7 +92,6 @@ builder.Services.AddControllers(option => {
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters(); //return type:json,xml
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
 
 //Swagger에 Token 입풋 기능 추가 
 builder.Services.AddSwaggerGen(option => {
@@ -120,6 +125,7 @@ builder.Services.AddSwaggerGen(option => {
             new List<string>()
         }
     });
+
     //Swegger UI
     option.SwaggerDoc("v1", new OpenApiInfo
     {

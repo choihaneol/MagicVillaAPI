@@ -1,16 +1,20 @@
 ﻿using MagicVilla_VillaAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_VillaAPI.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> //for using identity
+  //public class ApplicationDbContext : DbContext
+
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<LocalUser> LocalUsers { get; set; }
 
@@ -20,6 +24,7 @@ namespace MagicVilla_VillaAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); //for ApplicationUsers overiding
             modelBuilder.Entity<Villa>().HasData(
                 new Villa
                 {
@@ -87,4 +92,3 @@ namespace MagicVilla_VillaAPI.Data
 
 
 
- 

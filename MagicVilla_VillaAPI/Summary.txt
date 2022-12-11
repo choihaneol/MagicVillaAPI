@@ -55,3 +55,22 @@ BadRequest로 할지 _reponse 헤더에 담아서 IsSuccess 같은거로 반환�
 
 
 
+##Idnetity for authentication and authorization
+#Login
+- UserTable 추가 
+  1. Programs.cs에 Identity service 등록 
+  2. Nuget package Identity.EntityFrameworkCore 다운로드 
+  3. 로그인 유저네임을 담을 ApplicationUser 모델 생성
+  4. DbContext에 Application 테이블 추가
+- UserManager 추가
+  1. UserRepository에서 ApplicationUsers 모델로 username 체크, UserManager로 ID,Password 인증기능 추가
+  2. UserDTO 추가 loginResponseDTO에 User를 UserDTO타입으로 변경후
+     MappingConfig에 ApplicationUser, UserDTO 추가한뒤 UserRepository에서 automapper로 ApplicationUser를 UserDTO에 mapping
+#Register
+  1. UserManager를 사용해서 고객정보 DB저장
+  2. 고객 가입시 비밀버호에 대문자,소문자,숫자,특수문자 조합으로 입력해야 DB저장됨 
+
+
+##role
+1. userRepository에 RoleMager 추가
+2. Register()메서드에 admin, customer role 추가 
